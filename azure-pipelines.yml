@@ -11,7 +11,7 @@ pool:
 
 steps:
 
-- task: AzureCLI@2
+- task: AzurePowerShell@5
   displayName: Azure CLI
   inputs:
     azureSubscription: ErickPuga-MSDN-Subs
