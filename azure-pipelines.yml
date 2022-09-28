@@ -9,7 +9,14 @@ trigger:
 pool:
   vmImage: windows-latest
 
+variables:
+  WorkspaceId: 'c37e78a5-2fd6-4a0e-8e7e-2b46b3946281'
+  SubscriptionId: '8911ade0-2192-425e-a08d-c27be185a83e'
+  ResourceGroup: 'rg-test-insights'
+  WorkspaceName: 'wks-insights-test01'
+
 steps:
+
 - task: AzurePowerShell@5
   displayName: 'Azure PowerShell script: InlineScript'
   inputs:
@@ -18,14 +25,7 @@ steps:
     Inline: | 
       Install-Module -Name Az.OperationalInsights -Force
       $WorkspaceKey = Get-AzOperationalInsightsWorkspaceSharedKey -ResourceGroupName $(ResourceGroup) -Name $(WorkspaceName)
-    azurePowerShellVersion: LatestVersion
 
-- task: AzurePowerShell@5
-  displayName: 'Azure PowerShell script: InlineScript'
-  inputs:
-    azureSubscription: ErickPuga-MSDN-Subs
-    ScriptType: InlineScript
-    Inline: | 
       Install-Script -Name Install-VMInsights -Force
       Install-VMInsights.ps1 -WorkspaceId $(WorkspaceId) -WorkspaceKey $WorkspaceKey.PrimarySharedKey -SubscriptionId $(SubscriptionId) -WorkspaceRegion eastus2 -ResourceGroup $(ResourceGroup)
     azurePowerShellVersion: LatestVersion
