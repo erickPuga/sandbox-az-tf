@@ -20,4 +20,5 @@ steps:
     inlineScript: |
       az --version
       az account show
+      Install-Script -Name Install-VMInsights -Force
 
