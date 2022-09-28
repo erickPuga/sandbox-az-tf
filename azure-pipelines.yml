@@ -24,10 +24,16 @@ steps:
       $WorkspaceId = "c37e78a5-2fd6-4a0e-8e7e-2b46b3946281"
       $ResourceGroup = "rg-test-insights"
       $WorkspaceName = "wks-insights-test01"
-      $WorkspaceKey = Get-AzOperationalInsightsWorkspaceSharedKey -ResourceGroupName $ResourceGroup -Name $WorkspaceName
-
-      Install-VMInsights.ps1 -WorkspaceId $WorkspaceId -WorkspaceKey $WorkspaceKey.PrimarySharedKey -SubscriptionId $SubscriptionId -WorkspaceRegion eastus2 -ResourceGroup $ResourceGroup
-
-      
+      $WorkspaceKey = Get-AzOperationalInsightsWorkspaceSharedKey -ResourceGroupName $ResourceGroup -Name $WorkspaceName      
     azurePowerShellVersion: LatestVersion
+
+- task: AzurePowerShell@5
+  displayName: 'Azure PowerShell script: InlineScript'
+  inputs:
+    azureSubscription: ErickPuga-MSDN-Subs
+    ScriptType: InlineScript
+    azurePowerShellVersion: LatestVersion
+    Inline: | 
+    Install-VMInsights.ps1 -WorkspaceId $WorkspaceId -WorkspaceKey $WorkspaceKey.PrimarySharedKey -SubscriptionId $SubscriptionId -WorkspaceRegion eastus2 -ResourceGroup $ResourceGroup
+    
 
