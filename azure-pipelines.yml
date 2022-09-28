@@ -35,5 +35,3 @@ steps:
     azurePowerShellVersion: LatestVersion
     Inline: | 
     Install-VMInsights.ps1 -WorkspaceId $WorkspaceId -WorkspaceKey $WorkspaceKey.PrimarySharedKey -SubscriptionId $SubscriptionId -WorkspaceRegion eastus2 -ResourceGroup $ResourceGroup
-    
-
