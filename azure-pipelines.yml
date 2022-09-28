@@ -17,7 +17,7 @@ steps:
     ScriptType: InlineScript
     Inline: | 
 
-      Install-Script -Name Install-VMInsights -Force
+      
       Install-Module -Name Az.OperationalInsights -Force
 
       $SubscriptionId = "8911ade0-2192-425e-a08d-c27be185a83e"
@@ -33,5 +33,6 @@ steps:
     azureSubscription: ErickPuga-MSDN-Subs
     ScriptType: InlineScript
     Inline: | 
+      Install-Script -Name Install-VMInsights -Force
       Install-VMInsights.ps1 -WorkspaceId $WorkspaceId -WorkspaceKey $WorkspaceKey.PrimarySharedKey -SubscriptionId $SubscriptionId -WorkspaceRegion eastus2 -ResourceGroup $ResourceGroup
     azurePowerShellVersion: LatestVersion
