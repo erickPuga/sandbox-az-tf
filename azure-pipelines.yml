@@ -26,7 +26,7 @@ steps:
       $WorkspaceName = "wks-insights-test01"
       $WorkspaceKey = Get-AzOperationalInsightsWorkspaceSharedKey -ResourceGroupName $ResourceGroup -Name $WorkspaceName
 
-      .\Install-VMInsights.ps1 -WorkspaceId $WorkspaceId -WorkspaceKey $WorkspaceKey.PrimarySharedKey -SubscriptionId $SubscriptionId -WorkspaceRegion eastus2 -ResourceGroup $ResourceGroup
+      Install-VMInsights.ps1 -WorkspaceId $WorkspaceId -WorkspaceKey $WorkspaceKey.PrimarySharedKey -SubscriptionId $SubscriptionId -WorkspaceRegion eastus2 -ResourceGroup $ResourceGroup
 
       
     azurePowerShellVersion: LatestVersion
