@@ -18,7 +18,11 @@ steps:
     scriptType: ps
     scriptLocation: inlineScript
     inlineScript: |
-      az --version
-      az account show
       Install-Script -Name Install-VMInsights -Force
+
+      $WorkspaceId = "c37e78a5-2fd6-4a0e-8e7e-2b46b3946281"
+      $SubscriptionId = "8911ade0-2192-425e-a08d-c27be185a83e"
+      $ResourceGroup = "rg-test-insights"
+      $WorkspaceName = "wks-insights-test01"
+      $WorkspaceKey = Get-AzOperationalInsightsWorkspaceSharedKey -ResourceGroupName $ResourceGroup -Name $WorkspaceName
 
