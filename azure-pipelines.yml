@@ -15,6 +15,7 @@ steps:
   displayName: Azure CLI
   inputs:
     azureSubscription: ErickPuga-MSDN-Subs
+    scriptType: ps
     scriptLocation: inlineScript
     inlineScript: |
       az --version
