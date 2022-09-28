@@ -18,8 +18,9 @@ steps:
     scriptType: ps
     scriptLocation: inlineScript
     inlineScript: |
+      install-az-ps -Force
       $SubscriptionId = "8911ade0-2192-425e-a08d-c27be185a83e"
-      
+
       Set-AzContext -SubscriptionId $SubscriptionId
       Install-Script -Name Install-VMInsights -Force
       Install-Module -Name Az.OperationalInsights -Force
