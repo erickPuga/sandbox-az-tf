@@ -32,6 +32,6 @@ steps:
   inputs:
     azureSubscription: ErickPuga-MSDN-Subs
     ScriptType: InlineScript
-    azurePowerShellVersion: LatestVersion
     Inline: | 
-    Install-VMInsights.ps1 -WorkspaceId $WorkspaceId -WorkspaceKey $WorkspaceKey.PrimarySharedKey -SubscriptionId $SubscriptionId -WorkspaceRegion eastus2 -ResourceGroup $ResourceGroup
+      Install-VMInsights.ps1 -WorkspaceId $WorkspaceId -WorkspaceKey $WorkspaceKey.PrimarySharedKey -SubscriptionId $SubscriptionId -WorkspaceRegion eastus2 -ResourceGroup $ResourceGroup
+    azurePowerShellVersion: LatestVersion
