@@ -10,6 +10,13 @@ pool:
   vmImage: windows-latest
 
 steps:
-- powershell: ./enable-vminsights.ps1
-  displayName: 'Set Variables'
+
+- task: AzureCLI@2
+  displayName: Azure CLI
+  inputs:
+    azureSubscription: ErickPuga-MSDN-Subs
+    scriptLocation: inlineScript
+    inlineScript: |
+      az --version
+      az account show
 
