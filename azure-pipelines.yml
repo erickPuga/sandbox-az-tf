@@ -17,16 +17,13 @@ steps:
     azureSubscription: ErickPuga-MSDN-Subs
     scriptType: ps
     scriptLocation: inlineScript
-    inlineScript: |
-      install-az-ps -Force
-      $SubscriptionId = "8911ade0-2192-425e-a08d-c27be185a83e"
-
-      Set-AzContext -SubscriptionId $SubscriptionId
+    inlineScript: |      
       Install-Script -Name Install-VMInsights -Force
       Install-Module -Name Az.OperationalInsights -Force
 
+      $SubscriptionId = "8911ade0-2192-425e-a08d-c27be185a83e"
       $WorkspaceId = "c37e78a5-2fd6-4a0e-8e7e-2b46b3946281"
       $ResourceGroup = "rg-test-insights"
       $WorkspaceName = "wks-insights-test01"
-      $WorkspaceKey = Get-AzOperationalInsightsWorkspaceSharedKey -ResourceGroupName $ResourceGroup -Name $WorkspaceName
+      #$WorkspaceKey = Get-AzOperationalInsightsWorkspaceSharedKey -ResourceGroupName $ResourceGroup -Name $WorkspaceName
 
