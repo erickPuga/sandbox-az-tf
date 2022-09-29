@@ -17,15 +17,11 @@ variables:
 
 steps:
 
-- task: AzurePowerShell@5
-  displayName: 'Azure PowerShell script: InlineScript'
-  inputs:
-    azureSubscription: ErickPuga-MSDN-Subs
-    ScriptType: filePath
-    Inline: | 
+- powershell : |
       Install-Module -Name Az.OperationalInsights -Force
       Write-Host "##vso[task.setvariable variable=wkskey;isOutput=true]Get-AzOperationalInsightsWorkspaceSharedKey -ResourceGroupName $(ResourceGroup) -Name $(WorkspaceName)"
-    azurePowerShellVersion: LatestVersion
+  name: SetVarKey    
+
 
 - task: AzurePowerShell@5
   displayName: 'Azure PowerShell script: InlineScript'
@@ -35,5 +31,5 @@ steps:
     Inline: | 
       Install-Module -Name Az.OperationalInsights -Force
       Install-Script -Name Install-VMInsights -Force
-      Install-VMInsights.ps1 -WorkspaceId $(WorkspaceId) -WorkspaceKey $env:wkskey.PrimarySharedKey -SubscriptionId $(SubscriptionId) -WorkspaceRegion eastus2 -ResourceGroup $(ResourceGroup)
+      Install-VMInsights.ps1 -WorkspaceId $(WorkspaceId) -WorkspaceKey $(SetVarKey.wkskey.PrimaryKey) -SubscriptionId $(SubscriptionId) -WorkspaceRegion eastus2 -ResourceGroup $(ResourceGroup)
     azurePowerShellVersion: LatestVersion    
