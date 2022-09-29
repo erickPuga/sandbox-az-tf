@@ -27,7 +27,7 @@ steps:
   displayName: 'Azure PowerShell script: InlineScript'
   inputs:
     azureSubscription: ErickPuga-MSDN-Subs
-    ScriptType: InlineType
+    ScriptType: InlineScript
     Inline: | 
       Install-Module -Name Az.OperationalInsights -Force
       Install-Script -Name Install-VMInsights -Force
