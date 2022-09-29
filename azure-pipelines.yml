@@ -21,10 +21,7 @@ steps:
   displayName: 'Azure PowerShell script: InlineScript'
   inputs:
     azureSubscription: ErickPuga-MSDN-Subs
-    ScriptType: InlineScript
-    Inline: | 
-      Install-Module -Name Az.OperationalInsights -Force
-      Install-Script -Name Install-VMInsights -Force
-      #$WorkspaceKey = Get-AzOperationalInsightsWorkspaceSharedKey -ResourceGroupName $(ResourceGroup) -Name $(WorkspaceName)
-      Install-VMInsights.ps1 -WorkspaceId $(WorkspaceId) -WorkspaceKey $WorkspaceKey.PrimarySharedKey -SubscriptionId $(SubscriptionId) -WorkspaceRegion eastus2 -ResourceGroup $(ResourceGroup)
+    ScriptType: filePath
+    scriptPath: $(Build.SourcesDirectory)\enable-vmInsights.ps1
     azurePowerShellVersion: LatestVersion
+    pwsh: true
