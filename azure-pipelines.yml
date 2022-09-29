@@ -25,7 +25,6 @@ steps:
     Inline: | 
       Install-Module -Name Az.OperationalInsights -Force
       Install-Script -Name Install-VMInsights -Force
-
-      $WorkspaceKey = Get-AzOperationalInsightsWorkspaceSharedKey -ResourceGroupName $(ResourceGroup) -Name $(WorkspaceName)
-      #Install-VMInsights.ps1 -WorkspaceId $(WorkspaceId) -WorkspaceKey $WorkspaceKey.PrimarySharedKey -SubscriptionId $(SubscriptionId) -WorkspaceRegion eastus2 -ResourceGroup $(ResourceGroup)
+      #$WorkspaceKey = Get-AzOperationalInsightsWorkspaceSharedKey -ResourceGroupName $(ResourceGroup) -Name $(WorkspaceName)
+      Install-VMInsights.ps1 -WorkspaceId $(WorkspaceId) -WorkspaceKey $WorkspaceKey.PrimarySharedKey -SubscriptionId $(SubscriptionId) -WorkspaceRegion eastus2 -ResourceGroup $(ResourceGroup)
     azurePowerShellVersion: LatestVersion
