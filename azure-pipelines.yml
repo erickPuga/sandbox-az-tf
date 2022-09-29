@@ -28,7 +28,7 @@ steps:
       
       Install-Script -Name Install-VMInsights -Force
 
-        $connectionName = "AzureRunAsConnection"
+      $connectionName = "AzureRunAsConnection"
             try
             {
                 # Get the connection "AzureRunAsConnection "
