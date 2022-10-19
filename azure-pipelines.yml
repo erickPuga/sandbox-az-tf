@@ -26,11 +26,18 @@ steps:
      Install-Module -Name Az.OperationalInsights -Force
      
      $WorkspaceKey = Get-AzOperationalInsightsWorkspaceSharedKey -ResourceGroupName $(ResourceGroup) -Name $(WorkspaceName)
-     $JsonObject = $WorkspaceKey | ConvertTo-Json -Compress
-     $NewJsonObject = $JsonObject  |  ConvertFrom-Json
-     $WorkspaceKeytoString  = $NewJsonObject.PrimarySharedKey
-     
+     $WorkspaceKeytoJson = $WorkspaceKey | ConvertTo-Json -Compress
+     $WorkspaceKeyObject = $WorkspaceKeytoJson  |  ConvertFrom-Json
+     $WorkspaceKeytoString  = $WorkspaceKeyObject.PrimarySharedKey    
      Write-Host "##vso[task.setvariable variable=primarykey]$WorkspaceKeytoString"
+
+     $WorkspaceId = Get-AzOperationalInsightsWorkspace -ResourceGroupName $(ResourceGroup) -Name $(WorkspaceName)
+     $WorkspaceIdtoJson = $WorkspaceId | ConvertTo-Json -Compress
+     $WorkspaceIdObject = $WorkspaceIdtoJson  |  ConvertFrom-Json
+     $WorkspaceIdtoString  = $WorkspaceIdObject.CustomerId
+     Write-Host "##vso[task.setvariable variable=wksid]$WorkspaceIdtoString"
+
+     
     azurePowerShellVersion: LatestVersion
 
 - task: AzurePowerShell@3
@@ -40,5 +47,5 @@ steps:
     ScriptType: InlineScript
     Inline: |
      Install-Script -Name Install-VMInsights -Force
-     Install-VMInsights.ps1 -WorkspaceId $env:WorkspaceId -WorkspaceKey $env:PRIMARYKEY -SubscriptionId $env:SubscriptionId -WorkspaceRegion eastus2 -ResourceGroup $env:ResourceGroup -Approve -ErrorAction SilentlyContinue
+     Install-VMInsights.ps1 -WorkspaceId $env:WKSID -WorkspaceKey $env:PRIMARYKEY -SubscriptionId $env:SubscriptionId -WorkspaceRegion eastus2 -ResourceGroup $env:ResourceGroup -Approve -ErrorAction SilentlyContinue
     preferredAzurePowerShellVersion: 3.8.0
