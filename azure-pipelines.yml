@@ -36,7 +36,7 @@ steps:
      $WorkspaceIdtoString  = $WorkspaceIdObject.CustomerId
      Write-Host "##vso[task.setvariable variable=wksid]$WorkspaceIdtoString"
 
-     Write-Host "This is the workspaceId" $WKSID
+     Write-Host "This is the workspaceId" $env:WKSID
     azurePowerShellVersion: LatestVersion
 
 - task: AzurePowerShell@3
