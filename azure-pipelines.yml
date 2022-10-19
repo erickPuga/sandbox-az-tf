@@ -10,7 +10,6 @@ pool:
   vmImage: windows-latest
 
 variables:
-  WorkspaceId: '88383834-63d1-4e04-a41f-7a0c1cbcd4b7'
   SubscriptionId: '8911ade0-2192-425e-a08d-c27be185a83e'
   ResourceGroup: 'rg-test-insights'
   WorkspaceName: 'wks-insights-test01'
@@ -37,7 +36,7 @@ steps:
      $WorkspaceIdtoString  = $WorkspaceIdObject.CustomerId
      Write-Host "##vso[task.setvariable variable=wksid]$WorkspaceIdtoString"
 
-     
+     Write-Host "This is the workspaceId" $WKSID
     azurePowerShellVersion: LatestVersion
 
 - task: AzurePowerShell@3
