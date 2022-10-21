@@ -15,11 +15,22 @@ variables:
   WorkspaceName: 'wks-insights-test01'
 
 steps:
-
+- powershell: |
+   switch ("$(env)")
+   {
+       "prod" {"This is prod."; $Id="someIDrandomforprod"; $SP="Visual Studio Enterprise con MSDN (8911ade0-2192-425e-a08d-c27be185a83e)"}
+       "test" {"This is test."; $Id="someIDrandomfortest"; $SP=ErickPuga-MSDN-Subs}
+       "qa" {"This is qa."; $Id="someIDrandomforqa"}
+       "sandbox" {"This is sandbox."; $Id="someIDrandomforsandbox"}
+   }
+   
+   Write-Host $Id
+   Write-Host $SP
+  displayName: 'Set Variables'
 - task: AzurePowerShell@5
   displayName: 'Azure PowerShell script: InlineScript'
   inputs:
-    azureSubscription: 'ErickPuga-MSDN-Subs'
+    azureSubscription: '$SP'
     ScriptType: InlineScript
     Inline: |
      Install-Module -Name Az.OperationalInsights -Force
