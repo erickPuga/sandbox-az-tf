@@ -30,7 +30,7 @@ steps:
 - task: AzurePowerShell@5
   displayName: 'Azure PowerShell script: InlineScript'
   inputs:
-    azureSubscription: '$SP'
+    azureSubscription: $SP
     ScriptType: InlineScript
     Inline: |
      Install-Module -Name Az.OperationalInsights -Force
