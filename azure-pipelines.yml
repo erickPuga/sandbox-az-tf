@@ -10,7 +10,6 @@ pool:
   vmImage: windows-latest
 
 variables:
-  SubscriptionId: '8911ade0-2192-425e-a08d-c27be185a83e'
   ResourceGroup: 'rg-test-insights'
   WorkspaceName: 'wks-insights-test01'
 
@@ -33,8 +32,11 @@ steps:
     azureSubscription: 'ErickPuga-MSDN-Subs'
     ScriptType: InlineScript
     Inline: |
+    
+     $SubscriptionId = (Get-AzContext).Subscription.id
+     Write-Host "##vso[task.setvariable variable=sid]$SubscriptionId"
+
      Install-Module -Name Az.OperationalInsights -Force
-     
      $WorkspaceKey = Get-AzOperationalInsightsWorkspaceSharedKey -ResourceGroupName $(ResourceGroup) -Name $(WorkspaceName)
      $WorkspaceKeytoJson = $WorkspaceKey | ConvertTo-Json -Compress
      $WorkspaceKeyObject = $WorkspaceKeytoJson  |  ConvertFrom-Json
@@ -58,5 +60,5 @@ steps:
     Inline: |
      Write-Host "This is the workspaceId" $env:WKSID
      Install-Script -Name Install-VMInsights -Force
-     Install-VMInsights.ps1 -WorkspaceId $env:WKSID -WorkspaceKey $env:PRIMARYKEY -SubscriptionId $env:SubscriptionId -WorkspaceRegion eastus2 -ResourceGroup $env:ResourceGroup -Approve -ErrorAction SilentlyContinue
+     Install-VMInsights.ps1 -WorkspaceId $env:WKSID -WorkspaceKey $env:PRIMARYKEY -SubscriptionId $env:SID -WorkspaceRegion eastus2 -ResourceGroup $env:ResourceGroup -Approve -ErrorAction SilentlyContinue
     preferredAzurePowerShellVersion: 3.8.0
